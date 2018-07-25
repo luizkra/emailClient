@@ -7,6 +7,9 @@ class Content extends Component {
         <header className="Content-header">
           <h1 className="Content-title">Amazon</h1>
         </header>
+        <div className="Content-container">
+         <h2>Mails</h2>
+        </div>
       </div>
     );
   }
