@@ -1,18 +1,34 @@
 .App {
-  text-align: center; }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px; }
-
+  text-align: center;
+}
 .App-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
-  color: white; }
-
+  color: white;
+}
 .App-title {
-  font-size: 1.5em; }
-
+  font-size: 1.5em; 
+}
 .App-intro {
-  font-size: large; }
+  font-size: large; 
+}
+.App {
+  background-color: gray;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+}
+.App-right-side{
+  background-color: red;
+  width: 77%;
+  height: auto;
+}
+.App-left-side{
+  background-color: green;
+  width: 23%;
+  min-width: 260px;
+  height: auto;
+  border-right: 1px solid #B5B5B5;
+}

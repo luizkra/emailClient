@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
+import Content from './components/Content';
+import EmailList from './components/EmailList';
 class App extends Component {
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Hola</h1>
-        </header>
-        <p className="App-intro">
-          Mundo
-        </p>
+        <div className="App-left-side">
+          <EmailList />
+        </div>
+        <div className="App-right-side">
+          <Content />
+        </div>
       </div>
     );
   }
