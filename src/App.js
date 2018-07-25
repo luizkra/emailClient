@@ -6,7 +6,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App-container">
         <div className="App-left-side">
           <EmailList />
         </div>
