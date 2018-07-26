@@ -35,7 +35,7 @@
 	background-color: #4990E2;
     position: absolute;
 }*/
-/*div .item-custom::after{
+div .item-custom.new::after{
 	content: "";
     width: 10px;
     height: 10px;
@@ -44,7 +44,7 @@
     position: absolute;
     top: calc(50% - 5px);
     left: 5px;
-}*/
+}
 .user-name{
 	font-weight: 600;
 }
@@ -57,13 +57,17 @@
 }
 .item-description{
 	color: #9B9B9B;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .item-wrapper{
 	padding: 15px 20px 15px 23px;
     position: relative;
     width: 100%;
     text-align: left;
+    display: inline-grid;
 }
-.item-tittle, .item-description{
+.item-tittle{
 	margin: 3px 0 3px 0;
 }
