@@ -21,7 +21,7 @@ class EmailList extends Component {
         </header>
         <div className="List-custom">
         {items && items.map((item, index) => 
-          <div className="item-custom" key={index} onClick={() => this.viewEmail(index)}>
+          <div className={item.isReaded ? 'item-custom' : 'item-custom new'} key={index} onClick={() => this.viewEmail(index)}>
             <div className="item-wrapper">
               <div className="item-user">
                 <div className="user-icon"/>
