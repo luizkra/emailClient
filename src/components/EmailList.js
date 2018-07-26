@@ -1,41 +1,38 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../css/EmailList.css';
 class EmailList extends Component {
+
+  static propTypes = {
+    title: PropTypes.string,
+    items: PropTypes.array.isRequired
+  };
+
+  viewEmail = (index) => {
+    console.log('Show index ', index)
+  }
+
   render() {
+    const { title, items } = this.props;
     return (
       <div className="List-container">
         <header className="List-header">
-          <h1 className="List-title">Header</h1>
+          <h1 className="List-title">{title}</h1>
         </header>
         <div className="List-custom">
-        <div className="item-custom">
-        <div className="item-wrapper">
-          <div className="item-user"><div className="user-icon"></div> <div className="user-name">Google</div><div className="item-date">Jun 1</div></div>
-          <div className="item-tittle">Amazon SESS Addres Verification Request</div>
-          <div className="item-description">Lorem ipsum dolor amet consecutire dv </div>
-        </div>
-        </div>
-        <div className="item-custom">
-        <div className="item-wrapper">
-          <div className="item-user"><div className="user-icon"></div> <div className="user-name">Google</div><div className="item-date">Jun 1</div></div>
-          <div className="item-tittle">Amazon SESS Addres Verification Request</div>
-          <div className="item-description">Lorem ipsum dolor amet consecutire dv </div>
-        </div>
-        </div>
-        <div className="item-custom">
-        <div className="item-wrapper">
-          <div className="item-user"><div className="user-icon"></div> <div className="user-name">Google</div><div className="item-date">Jun 1</div></div>
-          <div className="item-tittle">Amazon SESS Addres Verification Request</div>
-          <div className="item-description">Lorem ipsum dolor amet consecutire dv </div>
-        </div>
-        </div>
-        <div className="item-custom">
-        <div className="item-wrapper">
-          <div className="item-user"><div className="user-icon"></div> <div className="user-name">Google</div><div className="item-date">Jun 1</div></div>
-          <div className="item-tittle">Amazon SESS Addres Verification Request</div>
-          <div className="item-description">Lorem ipsum dolor amet consecutire dv </div>
-        </div>
-        </div>
+        {items && items.map((item, index) => 
+          <div className="item-custom" key={index} onClick={() => this.viewEmail(index)}>
+            <div className="item-wrapper">
+              <div className="item-user">
+                <div className="user-icon"/>
+                <div className="user-name">{item.title}</div>
+                <div className="item-date">{item.date}</div>
+              </div>
+              <div className="item-tittle">{item.subject}</div>
+              <div className="item-description">{item.body}</div>
+            </div>
+          </div>
+          )}
         </div>
       </div>
     );
