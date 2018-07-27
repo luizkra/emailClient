@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
 import '../css/Content.css';
+import store from '../lib/store';
 class Content extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      mailViewer: []
+    }
+    store.subscribe(() => {
+      this.setState({
+        mailViewer: store.getState().mailViewer
+      })
+    })
+  }
   render() {
     return (
-      <div className="Content">
+      <div className="Content"> 
+      {this.state.mailViewer.map((item) => 
+        <div>
         <header className="Content-header">
-          <h5 className="Content-title">Amazon SES Address Verification Requets</h5>
+          <h5 className="Content-title">{item.subject}</h5>
         </header>
         <div className="Content-container">
           <div className="Mail-header">
-            <div className="Mail-from">Amazon.com<span>noreply@amazon.com </span> </div>
-            <div className="Mail-date">Thursday May 26, 11:09 AM</div>
+            <div className="Mail-from">{item.from}</div>
+            <div className="Mail-date">{item.date}</div>
           </div>
-          <div className="Mail-text">Lorem ipsu rs efrer erregerg ergrgregergreger ergergerg ergerge ergege wefwef
-            weewf wergerger ergerg ergreger regrg ergerg ergerg ergerg ergjshyevf khebfyewv wekfhbewfe wgwrg 
-            wwewregte regert erhytrh rthrt rrherg erhgthrthr trhtetheth
+          <div className="Mail-text">{item.body}
           </div>
         </div>
+        </div>
+        )}
       </div>
     );
   }

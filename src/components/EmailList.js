@@ -6,6 +6,8 @@ class EmailList extends Component {
   constructor() {
     super();
 
+    this.addToViewer = this.addToViewer.bind(this);
+
     this.state = {
       listMails: []
     }
@@ -35,11 +37,11 @@ class EmailList extends Component {
         </header>
         <div className="List-custom">
         {this.state.listMails.map((item, index) => 
-          <div className={item.isReaded ? 'item-custom' : 'item-custom new'} key={index} onClick={() => this.viewEmail(index)}>
+          <div className={item.isReaded ? 'item-custom' : 'item-custom new'} key={index} onClick={() => this.addToViewer(index)}>
             <div className="item-wrapper">
               <div className="item-user">
                 <div className="user-icon"/>
-                <div className="user-name">{item.title}</div>
+                <div className="user-name">{item.from}</div>
                 <div className="item-date">{new Intl.DateTimeFormat('en-GB', { 
                   year: 'numeric', 
                   month: 'long', 
@@ -54,6 +56,13 @@ class EmailList extends Component {
         </div>
       </div>
     );
+  }
+
+  addToViewer(idMail) {
+    store.dispatch({
+      type: "ADD_TO_VIEWER",
+      idMail
+    })
   }
 
 }
