@@ -29,7 +29,7 @@
 .item-custom:hover{
 	background-color: #F9F9F9;
 }
-.item-custom:active{
+.item-custom.active{
 	background-color: #F9F9F9;
 }
 div .item-custom.active::before{

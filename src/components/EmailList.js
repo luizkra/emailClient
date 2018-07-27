@@ -11,12 +11,14 @@ class EmailList extends Component {
     this.state = {
       listMails: [],
       trashMails: [],
-      spanMails: []
+      spanMails: [],
+      current: -1
     }
 
     store.subscribe(() => {
       this.setState({
-        listMails: store.getState().listMails
+        listMails: store.getState().listMails,
+        current: store.getState().current
       })
     })
   }
@@ -52,7 +54,7 @@ class EmailList extends Component {
         {this.state.listMails.length > 0 &&
         <div className="List-custom">
           {this.state.listMails.map((item, index) => 
-            <div className={item.isReaded ? 'item-custom' : 'item-custom new'} key={index} onClick={() => this.addToViewer(index)}>
+            <div className={(item.isReaded == true && this.state.current != index) ? 'item-custom' : (this.state.current === index && item.isReaded == true) ? 'item-custom active' : 'item-custom new'} key={index} onClick={() => this.addToViewer(index)}>
               <div className="item-wrapper">
                 <div className="item-user">
                   <div className="user-icon"/>
