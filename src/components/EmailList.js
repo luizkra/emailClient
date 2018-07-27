@@ -9,7 +9,9 @@ class EmailList extends Component {
     this.addToViewer = this.addToViewer.bind(this);
 
     this.state = {
-      listMails: []
+      listMails: [],
+      trashMails: [],
+      spanMails: []
     }
 
     store.subscribe(() => {
@@ -33,27 +35,41 @@ class EmailList extends Component {
     return (
       <div className="List-container">
         <header className="List-header">
-          <h1 className="List-title">{title}</h1>
-        </header>
-        <div className="List-custom">
-        {this.state.listMails.map((item, index) => 
-          <div className={item.isReaded ? 'item-custom' : 'item-custom new'} key={index} onClick={() => this.addToViewer(index)}>
-            <div className="item-wrapper">
-              <div className="item-user">
-                <div className="user-icon"/>
-                <div className="user-name">{item.from}</div>
-                <div className="item-date">{new Intl.DateTimeFormat('en-GB', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: '2-digit' 
-                }).format(item.title)}</div>
-              </div>
-              <div className="item-tittle">{item.subject}</div>
-              <div className="item-description">{item.body}</div>
-            </div>
+          <div className="left-menu-list">
+          <h3 className="List-title">{title}</h3>
           </div>
+          <div className="rigth-menu-list">
+            <i className="fas fa-inbox icon-mail-list active"> Inbox</i>
+            <i className="far fa-trash-alt icon-mail-list"> Trash</i>
+            <i className="fas fa-microchip icon-mail-list"> Spam</i>
+          </div>
+        </header>
+        {this.state.listMails.length < 1 &&
+          <div className="text-center-flex">
+            <h2 className="text-empty"> Bandeja de entrada vacía</h2>
+          </div>
+        }
+        {this.state.listMails.length > 0 &&
+        <div className="List-custom">
+          {this.state.listMails.map((item, index) => 
+            <div className={item.isReaded ? 'item-custom' : 'item-custom new'} key={index} onClick={() => this.addToViewer(index)}>
+              <div className="item-wrapper">
+                <div className="item-user">
+                  <div className="user-icon"/>
+                  <div className="user-name">{item.from} {index}</div>
+                  <div className="item-date">{new Intl.DateTimeFormat('en-GB', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: '2-digit' 
+                  }).format(new Date(item.date))}</div>
+                </div>
+                <div className="item-tittle">{item.subject}</div>
+                <div className="item-description">{item.body}</div>
+              </div>
+            </div>
           )}
         </div>
+        }
       </div>
     );
   }
