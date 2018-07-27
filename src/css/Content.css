@@ -6,6 +6,13 @@
 	flex-direction: column;
 	padding: 0px 40px 40px 40px;
 }
+.Content-empty {
+	background-color: #F6F6F7;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-self: center;
+}
 .Content-container{
 	background-color: #ffffff;
 	/*width: 100%;*/
@@ -25,4 +32,24 @@
 .Mail-header{
 	padding-bottom: 20px;
 	padding-top: 40px;
+}
+.Wrapper-content{
+	display: contents;
+}
+.mail-icon{
+	font-size: 12em;
+	color: #B5B5B5;
+}
+.rigth-menu{
+    display: inline-flex;
+    width: 21%;
+    justify-content: space-around;
+}
+.left-menu{
+	display: inline-block;
+	width: 79%;
+}
+.icon-action{
+	font-size: 19px;
+	color: #8B8B8B;
 }
