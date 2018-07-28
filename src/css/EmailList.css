@@ -102,3 +102,9 @@ div .item-custom.new::after{
 .text-empty{
 	color: gray;
 }
+.icon-mail-list.active:hover{
+	color: #8B8B8B;
+}
+.icon-mail-list:hover{
+	color: #4990E2;
+}

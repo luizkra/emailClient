@@ -64,7 +64,7 @@ class Content extends Component {
       );
     }
     return (
-      <div>
+      <div className="Content-first">
       {showContent}
       </div>
     );

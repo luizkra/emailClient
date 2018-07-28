@@ -53,3 +53,9 @@
 	font-size: 19px;
 	color: #8B8B8B;
 }
+.icon-action:hover{
+	color: #4990E2;
+}
+.Content-first{
+	display: contents;
+}
