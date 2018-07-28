@@ -18,6 +18,7 @@ class EmailList extends Component {
     store.subscribe(() => {
       this.setState({
         listMails: store.getState().listMails,
+        trashMails: store.getState().trashMails,
         current: store.getState().current
       })
     })

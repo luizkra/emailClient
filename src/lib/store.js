@@ -1,26 +1,34 @@
 import { createStore} from 'redux'
 const reducer = (state, action) => {
-	const arrayGlobal = state.listMails
+	const listMailsGlobal = state.listMails
+	const trashMailsGlobal = state.trashMails
+	const spanMailsGlobal = state.spanMails
 	switch(action.type) {
     case 'ADD_TO_LIST':
-    const arrayAux1 = arrayGlobal.concat(action.mail)
       return {
       	...state,
-      	listMails: arrayAux1
+      	listMails: listMailsGlobal.concat(action.mail)
       }
     case 'ADD_TO_VIEWER':
       return {
       	...state,
-      	mailViewer: arrayGlobal.filter((mail, index) => {return index == action.idMail}),
-      	listMails: arrayGlobal.map(
+      	mailViewer: listMailsGlobal.filter((mail, index) => {return index == action.idMail}),
+      	listMails: listMailsGlobal.map(
            (mail, i) => i === action.idMail ? {...mail, isReaded: true}: mail),
       	current: action.idMail
       }
     case 'ADD_TO_UNREAD':
       return {
       	...state,
-      	listMails: arrayGlobal.map(
+      	listMails: listMailsGlobal.map(
            (mail, i) => i === action.current ? {...mail, isReaded: false}: mail),
+      	mailViewer: []
+      }
+    case 'MOVE_TO_TRASH':
+      return {
+      	...state,
+      	trashMails: state.trashMails.concat(state.listMails.filter((mail, index) => {return index == action.current})),
+      	listMails: listMailsGlobal.filter((mail, index) => {return index != action.current}),
       	mailViewer: []
       }
     default:

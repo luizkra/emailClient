@@ -9,6 +9,8 @@ class Content extends Component {
       current: -1
     }
     this.unreadEmail = this.unreadEmail.bind(this);
+    this.moveTrash = this.moveTrash.bind(this);
+    this.moveSpam = this.moveSpam.bind(this);
     store.subscribe(() => {
       this.setState({
         mailViewer: store.getState().mailViewer,
@@ -31,8 +33,8 @@ class Content extends Component {
               </div>
               <div className="rigth-menu">
                 <i className="fas fa-circle icon-action" onClick={() => this.unreadEmail(this.state.current)}></i>
-                <i className="far fa-trash-alt icon-action"></i>
-                <i className="fas fa-microchip icon-action"></i>
+                <i className="far fa-trash-alt icon-action" onClick={() => this.moveTrash(this.state.current)}></i>
+                <i className="fas fa-microchip icon-action" onClick={() => this.moveSpam(this.state.current)}></i>
               </div>
             </header>
             <div className="Content-container">
@@ -68,17 +70,17 @@ class Content extends Component {
     );
   }
 
-  addSpam(idMail) {
+  moveSpam(current) {
     store.dispatch({
-      type: "ADD_TO_SPAM",
-      idMail
+      type: "MOVE_TO_SPAM",
+      current
     })
   }
 
-  addTrash(idMail) {
+  moveTrash(current) {
     store.dispatch({
-      type: "ADD_TO_TRASH",
-      idMail
+      type: "MOVE_TO_TRASH",
+      current
     })
   }
 
