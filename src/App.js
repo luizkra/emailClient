@@ -17,7 +17,6 @@ class App extends Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       data.map((mails, index)=>{
-        console.log(mails, index)
         //var newMails = this.state.mails.concat(mails);
         //this.setState({ mails: newMails })
         this.addToList(mails)

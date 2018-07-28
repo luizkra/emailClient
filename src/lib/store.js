@@ -33,13 +33,28 @@ const reducer = (state, action) => {
       }
     case 'MOVE_TO_SPAM':
       return {
+        ...state,
+        spanMails: state.spanMails.concat(state.listMails.filter((mail, index) => {return index == action.current})),
+        listMails: listMailsGlobal.filter((mail, index) => {return index != action.current}),
+        mailViewer: []
+      }
+    case 'SHOW_IMBOX':
+      return {
+        ...state,
+        currentView: state.currentView = 0
+      }
+    case 'SHOW_TRASH':
+      return {
+        ...state,
+        currentView: state.currentView = 1
+      }
+    case 'SHOW_SPAM':
+      return {
       	...state,
-      	spanMails: state.spanMails.concat(state.listMails.filter((mail, index) => {return index == action.current})),
-      	listMails: listMailsGlobal.filter((mail, index) => {return index != action.current}),
-      	mailViewer: []
+      	currentView: state.currentView = 2
       }
     default:
       return state
   	}
 }
-export default createStore(reducer, { listMails: [],spanMails: [],trashMails: [], mailViewer: [], current: -1})
+export default createStore(reducer, { listMails: [],spanMails: [],trashMails: [], mailViewer: [], current: -1, currentView: 0})
