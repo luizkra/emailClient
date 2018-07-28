@@ -26,8 +26,15 @@ const reducer = (state, action) => {
       }
     case 'MOVE_TO_TRASH':
       return {
+        ...state,
+        trashMails: state.trashMails.concat(state.listMails.filter((mail, index) => {return index == action.current})),
+        listMails: listMailsGlobal.filter((mail, index) => {return index != action.current}),
+        mailViewer: []
+      }
+    case 'MOVE_TO_SPAM':
+      return {
       	...state,
-      	trashMails: state.trashMails.concat(state.listMails.filter((mail, index) => {return index == action.current})),
+      	spanMails: state.spanMails.concat(state.listMails.filter((mail, index) => {return index == action.current})),
       	listMails: listMailsGlobal.filter((mail, index) => {return index != action.current}),
       	mailViewer: []
       }
