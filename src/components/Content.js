@@ -6,7 +6,7 @@ class Content extends Component {
     super();
     this.state = {
       mailViewer: [],
-      current: -1
+      current: []
     }
     this.unreadEmail = this.unreadEmail.bind(this);
     this.moveTrash = this.moveTrash.bind(this);
@@ -16,13 +16,19 @@ class Content extends Component {
         mailViewer: store.getState().mailViewer,
         trashMails: store.getState().trashMails,
         spanMails: store.getState().spanMails,
-        current: store.getState().current
+        current: store.getState().current,
+        currentView: store.getState().currentView
       })
     })
   }
 
   render() {
     let showContent = "";
+    let inactiveimboxClass = ["content-icon-viewer"];
+    let inactivetrashClass = ["content-icon-viewer"];
+    let inactivespamClass = ["content-icon-viewer"];
+
+    (this.state.current.typeMail === 'trash')?(inactivetrashClass.push('inactive'), inactiveimboxClass.push('inactive')):(this.state.current.typeMail === 'spam')?(inactiveimboxClass.push('inactive'), inactivespamClass.push('inactive')):'';
     let ContendFull = (
       <div className="Content">
         {this.state.mailViewer.map((item, index) => 
@@ -32,9 +38,15 @@ class Content extends Component {
                 <h5 className="Content-title">{item.subject}</h5>
               </div>
               <div className="rigth-menu">
-                <i className="fas fa-circle icon-action" onClick={() => this.unreadEmail(this.state.current)}></i>
-                <i className="far fa-trash-alt icon-action" onClick={() => this.moveTrash(this.state.current)}></i>
-                <i className="fas fa-microchip icon-action" onClick={() => this.moveSpam(this.state.current)}></i>
+                <div className={inactiveimboxClass.join(' ')}>
+                  <i className="fas fa-circle icon-action" onClick={() => this.unreadEmail(this.state.current.idMail)}></i>
+                </div>
+                <div className={inactivetrashClass.join(' ')}>
+                  <i className="far fa-trash-alt icon-action" onClick={() => this.moveTrash(this.state.current.idMail)}></i>
+                </div>
+                <div className={inactivespamClass.join(' ')}>
+                  <i className="fas fa-microchip icon-action" onClick={() => this.moveSpam(this.state.current.idMail)}></i>
+                </div>
               </div>
             </header>
             <div className="Content-container">
@@ -63,6 +75,7 @@ class Content extends Component {
         </div>
       );
     }
+
     return (
       <div className="Content-first">
       {showContent}
