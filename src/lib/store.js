@@ -1,8 +1,7 @@
 import { createStore} from 'redux'
 const reducer = (state, action) => {
 	const listMailsGlobal = state.listMails
-	const trashMailsGlobal = state.trashMails
-	const spanMailsGlobal = state.spanMails
+  let activeList = state.currentView === 1 ? state.trashMails: state.currentView === 2 ? state.spanMails : state.listMails;
 	switch(action.type) {
     case 'ADD_TO_LIST':
       return {
@@ -12,7 +11,7 @@ const reducer = (state, action) => {
     case 'ADD_TO_VIEWER':
       return {
       	...state,
-      	mailViewer: listMailsGlobal.filter((mail, index) => {return index === action.idMail}),
+      	mailViewer: activeList.filter((mail, index) => {return index === action.idMail}),
       	listMails: listMailsGlobal.map(
            (mail, i) => i === action.idMail ? {...mail, isReaded: true}: mail),
       	current: {idMail: action.idMail, typeMail:action.typeMail}

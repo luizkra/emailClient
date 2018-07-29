@@ -35,7 +35,7 @@ class Content extends Component {
           <div className="Wrapper-content"key={index}>
             <header className="Content-header">
               <div className="left-menu">
-                <h5 className="Content-title">{item.subject} {index} {this.state.current.idMail}</h5>
+                <h5 className="Content-title">{item.subject}</h5>
               </div>
               <div className="rigth-menu">
                 <div className={inactiveimboxClass.join(' ')}>
