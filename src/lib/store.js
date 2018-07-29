@@ -12,10 +12,10 @@ const reducer = (state, action) => {
     case 'ADD_TO_VIEWER':
       return {
       	...state,
-      	mailViewer: listMailsGlobal.filter((mail, index) => {return index == action.idMail}),
+      	mailViewer: listMailsGlobal.filter((mail, index) => {return index === action.idMail}),
       	listMails: listMailsGlobal.map(
            (mail, i) => i === action.idMail ? {...mail, isReaded: true}: mail),
-      	current: action.idMail
+      	current: {idMail: action.idMail, typeMail:action.typeMail}
       }
     case 'ADD_TO_UNREAD':
       return {
@@ -27,15 +27,15 @@ const reducer = (state, action) => {
     case 'MOVE_TO_TRASH':
       return {
         ...state,
-        trashMails: state.trashMails.concat(state.listMails.filter((mail, index) => {return index == action.current})),
-        listMails: listMailsGlobal.filter((mail, index) => {return index != action.current}),
+        trashMails: state.trashMails.concat(state.listMails.filter((mail, index) => {return index === action.current})),
+        listMails: listMailsGlobal.filter((mail, index) => {return index !== action.current}),
         mailViewer: []
       }
     case 'MOVE_TO_SPAM':
       return {
         ...state,
-        spanMails: state.spanMails.concat(state.listMails.filter((mail, index) => {return index == action.current})),
-        listMails: listMailsGlobal.filter((mail, index) => {return index != action.current}),
+        spanMails: state.spanMails.concat(state.listMails.filter((mail, index) => {return index === action.current})),
+        listMails: listMailsGlobal.filter((mail, index) => {return index !== action.current}),
         mailViewer: []
       }
     case 'SHOW_IMBOX':
@@ -57,4 +57,4 @@ const reducer = (state, action) => {
       return state
   	}
 }
-export default createStore(reducer, { listMails: [],spanMails: [],trashMails: [], mailViewer: [], current: -1, currentView: 0})
+export default createStore(reducer, { listMails: [],spanMails: [],trashMails: [], mailViewer: [], current: [], currentView: 0})
