@@ -27,8 +27,13 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-      <h1>Hola emailClients</h1>
+      <div className="App-container">
+        <div className="App-left-side">
+          <EmailList />
+        </div>
+        <div className="App-right-side">
+          <Content />
+        </div>
       </div>
     );
   }
