@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import store from '../lib/store';
 import '../scss/EmailList.scss';
+import { addToViewer, showImbox, showTrash, showSpam } from '../actionCreators';
+
 class EmailList extends Component {
   constructor() {
     super();
@@ -161,26 +163,16 @@ class EmailList extends Component {
   }
 
   addToViewer(idMail, typeMail) {
-    store.dispatch({
-      type: "ADD_TO_VIEWER",
-      idMail,
-      typeMail
-    })
+    store.dispatch(addToViewer(idMail, typeMail))
   }
   showImbox() {
-    store.dispatch({
-      type: "SHOW_IMBOX",
-    })
+    store.dispatch(showImbox())
   }
   showTrash() {
-    store.dispatch({
-      type: "SHOW_TRASH",
-    })
+    store.dispatch(showTrash())
   }
   showSpam() {
-    store.dispatch({
-      type: "SHOW_SPAM",
-    })
+    store.dispatch(showSpam())
   }
 
 }
