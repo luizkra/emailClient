@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import store from '../lib/store';
-import '../css/EmailList.css';
+import '../css/EmailList.scss';
 class EmailList extends Component {
   constructor() {
     super();

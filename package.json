@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start"
+    "start:dev": "webpack-dev-server --mode development --config config/webpack.base.config.js --open --hot --history-api-fallback"
   },
   "keywords": [],
   "author": "",

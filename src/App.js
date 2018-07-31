@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './css/App.css';
+import './css/App.scss';
 import Content from './components/Content';
 import EmailList from './components/EmailList';
 import store from './lib/store';
 import data from './data/mail-data.json';
+
 class App extends Component {
   constructor() {
     super();
@@ -26,13 +27,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App-container">
-        <div className="App-left-side">
-          <EmailList />
-        </div>
-        <div className="App-right-side">
-          <Content />
-        </div>
+      <div>
+      <h1>Hola emailClients</h1>
       </div>
     );
   }
