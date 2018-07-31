@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/Content.scss';
+import '../scss/Content.scss';
 import store from '../lib/store';
 class Content extends Component {
   constructor() {

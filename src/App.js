@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/App.scss';
+import './scss/App.scss';
 import Content from './components/Content';
 import EmailList from './components/EmailList';
 import store from './lib/store';
