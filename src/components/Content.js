@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../scss/Content.scss';
 import store from '../lib/store';
+import { moveSpam, moveTrash, unreadEmail } from '../actionCreators';
+
 class Content extends Component {
   constructor() {
     super();
@@ -84,24 +86,15 @@ class Content extends Component {
   }
 
   moveSpam(current) {
-    store.dispatch({
-      type: "MOVE_TO_SPAM",
-      current
-    })
+    store.dispatch(moveSpam(current))
   }
 
   moveTrash(current) {
-    store.dispatch({
-      type: "MOVE_TO_TRASH",
-      current
-    })
+    store.dispatch(moveTrash(current))
   }
 
   unreadEmail(current) {
-    store.dispatch({
-      type: "ADD_TO_UNREAD",
-      current
-    })
+    store.dispatch(unreadEmail(current))
   }
 }
 

@@ -4,6 +4,7 @@ import Content from './components/Content';
 import EmailList from './components/EmailList';
 import store from './lib/store';
 import data from './data/mail-data.json';
+import { addToList } from './actionCreators';
 
 class App extends Component {
   constructor() {
@@ -22,7 +23,7 @@ class App extends Component {
         //this.setState({ mails: newMails })
         this.addToList(mails)
       })
-    }, 5000);
+    }, 9000);
   }
 
   render() {
@@ -38,10 +39,7 @@ class App extends Component {
     );
   }
   addToList(mail) {
-    store.dispatch({
-      type: "ADD_TO_LIST",
-      mail
-    })
+    store.dispatch(addToList(mail))
   }
 }
 export default App;
