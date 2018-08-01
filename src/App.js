@@ -4,7 +4,7 @@ import Content from './components/Content';
 import EmailList from './components/EmailList';
 import store from './lib/store';
 import data from './data/mail-data.json';
-import { addToList } from './actionCreators';
+import { addToList } from './lib/actionCreators';
 
 class App extends Component {
   constructor() {
@@ -19,8 +19,6 @@ class App extends Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       data.map((mails, index)=>{
-        //var newMails = this.state.mails.concat(mails);
-        //this.setState({ mails: newMails })
         this.addToList(mails)
       })
     }, 9000);

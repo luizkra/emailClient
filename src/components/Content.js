@@ -1,101 +1,80 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../scss/Content.scss';
 import store from '../lib/store';
-import { moveSpam, moveTrash, unreadEmail } from '../actionCreators';
+import { moveSpam, moveTrash, unreadEmail } from '../lib/actionCreators';
+import { connect } from 'react-redux';
 
-class Content extends Component {
-  constructor() {
-    super();
-    this.state = {
-      mailViewer: [],
-      current: []
-    }
-    this.unreadEmail = this.unreadEmail.bind(this);
-    this.moveTrash = this.moveTrash.bind(this);
-    this.moveSpam = this.moveSpam.bind(this);
-    store.subscribe(() => {
-      this.setState({
-        mailViewer: store.getState().mailViewer,
-        trashMails: store.getState().trashMails,
-        spanMails: store.getState().spanMails,
-        current: store.getState().current,
-        currentView: store.getState().currentView
-      })
-    })
-  }
-
-  render() {
-    let showContent = "";
-    let inactiveimboxClass = ["content-icon-viewer"];
-    let inactivetrashClass = ["content-icon-viewer"];
-    let inactivespamClass = ["content-icon-viewer"];
-
-    (this.state.current.typeMail === 'trash')?(inactivetrashClass.push('inactive'), inactiveimboxClass.push('inactive')):(this.state.current.typeMail === 'spam')?(inactiveimboxClass.push('inactive'), inactivespamClass.push('inactive')):'';
-    let ContendFull = (
-      <div className="Content">
-        {this.state.mailViewer.map((item, index) => 
-          <div className="Wrapper-content"key={index}>
-            <header className="Content-header">
-              <div className="left-menu">
-                <h5 className="Content-title">{item.subject}</h5>
-              </div>
-              <div className="rigth-menu">
-                <div className={inactiveimboxClass.join(' ')}>
-                  <i className="fas fa-circle icon-action" onClick={() => this.unreadEmail(this.state.current.idMail)}></i>
-                </div>
-                <div className={inactivetrashClass.join(' ')}>
-                  <i className="far fa-trash-alt icon-action" onClick={() => this.moveTrash(this.state.current.idMail)}></i>
-                </div>
-                <div className={inactivespamClass.join(' ')}>
-                  <i className="fas fa-microchip icon-action" onClick={() => this.moveSpam(this.state.current.idMail)}></i>
-                </div>
-              </div>
-            </header>
-            <div className="Content-container">
-              <div className="Mail-header">
-                <div className="Mail-from">{item.from}</div>
-                <div className="Mail-date">{new Intl.DateTimeFormat('es-GB', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: '2-digit' 
-                    }).format(new Date(item.date))}
-                </div>
-              </div>
-              <div className="Mail-text">{item.body}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-    if (this.state.mailViewer.length > 0) {
-      showContent = ContendFull
-    }else{
-      showContent = (
-        <div className="Content-empty">
-          <i className="far fa-envelope mail-icon"></i>
-        </div>
-      );
-    }
+const Content = ({ mailViewer, unreadEmail }) => {
 
     return (
       <div className="Content-first">
-      {showContent}
+       { mailViewer.length < 1 ? 
+       <div className="Content-empty">
+           <i className="far fa-envelope mail-icon"></i>
+        </div> :
+        <div className="Content">
+          {mailViewer.map((item, index) =>
+            <div className="Wrapper-content" key={index}>
+              <header className="Content-header">
+                <div className="left-menu">
+                  <h5 className="Content-title">{item.subject}</h5>
+                </div>
+                <div className="rigth-menu">
+                  <div className="">
+                    <i className="fas fa-circle icon-action" onClick={() => unreadEmail(current.idMail, typeMail)}></i>
+                  </div>
+                  <div className="">
+                    <i className="far fa-trash-alt icon-action" onClick={() => this.unreadEmail(current.idMail, typeMail)}></i>
+                  </div>
+                  <div className="">
+                    <i className="fas fa-microchip icon-action" onClick={() => this.unreadEmail(current.idMail, typeMail)}></i>
+                  </div>
+                </div>
+              </header>
+              <div className="Content-container">
+                <div className="Mail-header">
+                  <div className="Mail-from">{item.from}</div>
+                  <div className="Mail-date">{new Intl.DateTimeFormat('es-GB', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: '2-digit'
+                  }).format(new Date(item.date))}
+                  </div>
+                </div>
+                <div className="Mail-text">{item.body}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+       }
       </div>
     );
-  }
+  //}
 
-  moveSpam(current) {
-    store.dispatch(moveSpam(current))
-  }
+  // moveSpam(current) {
+  //   store.dispatch(moveSpam(current))
+  // }
 
-  moveTrash(current) {
-    store.dispatch(moveTrash(current))
-  }
+  // moveTrash(current) {
+  //   store.dispatch(moveTrash(current))
+  // }
 
-  unreadEmail(current) {
-    store.dispatch(unreadEmail(current))
+  // unreadEmail(current) {
+  //   store.dispatch(unreadEmail(current))
+  // }
+}
+const mapStateToProps = state => {
+  return {
+    mailViewer: state.mailViewer,
+    current: state.current,
   }
 }
-
-export default Content;
+const mapDispatchToProps = dispatch => {
+  return {
+    unreadEmail(current, typeMail) {
+        dispatch(unreadEmail(current, typeMail))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Content);
