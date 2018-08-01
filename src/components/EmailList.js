@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import store from '../lib/store';
 import '../scss/EmailList.scss';
-import { addToViewer, showImbox, showTrash, showSpam } from '../actionCreators';
+import { addToViewer, showImbox, showTrash, showSpam } from '../lib/actionCreators';
 
 class EmailList extends Component {
   constructor() {

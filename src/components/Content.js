@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../scss/Content.scss';
 import store from '../lib/store';
-import { moveSpam, moveTrash, unreadEmail } from '../actionCreators';
+import { moveSpam, moveTrash, unreadEmail } from '../lib/actionCreators';
 
 class Content extends Component {
   constructor() {
@@ -16,10 +16,7 @@ class Content extends Component {
     store.subscribe(() => {
       this.setState({
         mailViewer: store.getState().mailViewer,
-        trashMails: store.getState().trashMails,
-        spanMails: store.getState().spanMails,
         current: store.getState().current,
-        currentView: store.getState().currentView
       })
     })
   }
