@@ -6,12 +6,12 @@ import { addToViewer, showImbox, showTrash, showSpam } from '../lib/actionCreato
 import { connect } from 'react-redux';
 import Selector from './Selector';
 
-const EmailList = ({ listMails, addToViewer, current }) => {
+const EmailList = ({ listMails, addToViewer, current, badge }) => {
     return (
       <div className="List-container">
         <header className="List-header">
           <div className="left-menu-list">
-            <h3 className="List-title">Inbox <span className="badge">2</span></h3>
+            <h3 className="List-title">Inbox <span className="badge">{badge}</span></h3>
           </div>
           <div className="rigth-menu-list">
           <Selector/>
@@ -68,6 +68,7 @@ const mapStateToProps = state => {
   return {
     listMails: state.listMails,
     current: state.current,
+    badge: state.badge
   }
 }
 

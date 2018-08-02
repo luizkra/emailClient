@@ -6,7 +6,8 @@ const reducer = (state, action) => {
     case 'ADD_TO_LIST':
       return {
       	...state,
-      	listMails: listMailsGlobal.concat(action.mail)
+      	listMails: listMailsGlobal.concat(action.mail),
+        badge: state.listMails.reduce((pre, cur) => (cur.isReaded === false) ? ++pre : pre, 1)
       }
     case 'ADD_TO_VIEWER':
       return {
@@ -14,14 +15,16 @@ const reducer = (state, action) => {
       	mailViewer: activeList.filter((mail, index) => {return index === action.idMail}),
       	listMails: listMailsGlobal.map(
            (mail, i) => i === action.idMail ? {...mail, isReaded: true}: mail),
-      	current: {idMail: action.idMail, typeMail:action.typeMail}
+        current: {idMail: action.idMail, typeMail:action.typeMail},
+        badge: --state.badge
       }
     case 'ADD_TO_UNREAD':
       return {
       	...state,
       	listMails: listMailsGlobal.map(
            (mail, i) => i === action.current ? {...mail, isReaded: false}: mail),
-      	mailViewer: []
+        mailViewer: [],
+        badge: state.listMails.reduce((pre, cur) => (cur.isReaded === false) ? ++pre : pre, 1)
       }
     case 'MOVE_TO_TRASH':
       return {
@@ -56,4 +59,4 @@ const reducer = (state, action) => {
       return state
   	}
 }
-export default createStore(reducer, { listMails: [],spanMails: [],trashMails: [], mailViewer: [], current: [], currentView: 0})
+export default createStore(reducer, { listMails: [],spanMails: [],trashMails: [], mailViewer: [], current: [], currentView: 0, badge: 0})
