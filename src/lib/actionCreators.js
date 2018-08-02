@@ -51,11 +51,14 @@ const moveTrash = current => {
     }
 }
 
-const unreadEmail = current => {
+const actionButons = (current, typeMail) => {
+  let typeCorrect;
+  typeMail==='trash' ? typeCorrect= 'MOVE_TO_TRASH' : typeMail==='spam' ? typeCorrect= 'MOVE_TO_SPAM' : typeCorrect= 'ADD_TO_UNREAD';
+
 	return {
-      type: "ADD_TO_UNREAD",
+      type: typeCorrect,
       current
     }
 }
 
-export { addToList, addToViewer, showImbox, showTrash, showSpam, moveSpam, moveTrash, unreadEmail }
+export { addToList, addToViewer, showImbox, showTrash, showSpam, moveSpam, moveTrash, actionButons }

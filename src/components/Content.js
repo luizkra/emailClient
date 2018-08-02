@@ -1,11 +1,11 @@
 import React from 'react';
 import '../scss/Content.scss';
 import store from '../lib/store';
-import { moveSpam, moveTrash, unreadEmail } from '../lib/actionCreators';
+import { moveSpam, moveTrash, actionButons } from '../lib/actionCreators';
 import { connect } from 'react-redux';
 import ButtonCustom from './ButtonCustom';
 
-const Content = ({ mailViewer, unreadEmail }) => {
+const Content = ({ mailViewer, actionButons, current }) => {
 
     return (
       <div className="Content-first">
@@ -18,15 +18,15 @@ const Content = ({ mailViewer, unreadEmail }) => {
             <header>
               <div className="left-menu-header">
                 <div className="">
-                <ButtonCustom customClass={'deleteMailButton'}  textBtn='Delete' click={() => this.unreadEmail(current.idMail, 'trash')} />
+                <ButtonCustom customClass={'deleteMailButton'}  textBtn='Delete' click={() => actionButons(current.idMail, 'trash')} />
                 </div>
                 <div className="">
-                <ButtonCustom customClass={'spamMailButton'}  textBtn='Spam' click={() => this.unreadEmail(current.idMail, 'spam')} />
+                <ButtonCustom customClass={'spamMailButton'}  textBtn='Spam' click={() => actionButons(current.idMail, 'spam')} />
                 </div>
               </div>
               <div className="rigth-menu-header">
                 <div className="">
-                <ButtonCustom customClass={'unreadMailButton'}  textBtn='Mark as unread' click={() => this.unreadEmail(current.idMail, 'inbox')} />
+                <ButtonCustom customClass={'unreadMailButton'}  textBtn='Mark as unread' click={() => actionButons(current.idMail, 'inbox')} />
                 </div>
               </div>
             </header>
@@ -91,8 +91,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    unreadEmail(current, typeMail) {
-        dispatch(unreadEmail(current, typeMail))
+    actionButons(current, typeMail) {
+        dispatch(actionButons(current, typeMail))
     }
   }
 }
