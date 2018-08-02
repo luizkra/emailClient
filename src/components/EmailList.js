@@ -11,7 +11,7 @@ const EmailList = ({ listMails, addToViewer, current }) => {
       <div className="List-container">
         <header className="List-header">
           <div className="left-menu-list">
-            <h3 className="List-title">title</h3>
+            <h3 className="List-title">Inbox <span className="badge">2</span></h3>
           </div>
           <div className="rigth-menu-list">
           <Selector/>
@@ -27,18 +27,18 @@ const EmailList = ({ listMails, addToViewer, current }) => {
             <div className="List-custom">
               {listMails.map((item, index) =>
                 <div className={(item.isReaded == true && current.idMail != index) ? 'item-custom' : (current.idMail === index && item.isReaded == true) ? 'item-custom active' : 'item-custom new'} key={index} onClick={() => addToViewer(index, 'spam')}>
-                  <div className="item-wrapper">
-                    <div className="item-user">
-                      <div className="user-name">{item.from}</div>
+                    <div className="col-user">
+                      <div className="item-name">{item.from}</div>
+                    <div className="item-description">{item.body}</div>
+                    </div>
+                    <div className="col-date">
                       <div className="item-date">{new Intl.DateTimeFormat('en-GB', {
                         year: 'numeric',
                         month: 'short',
                         day: '2-digit'
                       }).format(new Date(item.date))}</div>
-                    </div>
-                    <div className="item-tittle">{item.subject}</div>
-                    <div className="item-description">{item.body}</div>
-                  </div>
+                      <i className="fas fa-paperclip"></i>
+                      </div>
                 </div>
               )}
             </div>
