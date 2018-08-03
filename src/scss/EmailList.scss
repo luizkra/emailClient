@@ -56,19 +56,19 @@
 	}
 }
 .item-custom:hover {
-	background-color: red;
-	box-shadow: 0 0 7px 3px rgb(79, 187, 239);
-	
+	background-color: rgba(65, 182, 236, 0.05);
+    box-shadow: inset 0px 0px 20px 0px rgba(65, 182, 236, 0.28);
 	
 }
 .item-custom.active {
 	background-color: $customHover;
+	color: $colorBlue;
 }
 div .item-custom.active::before {
 	content: "";
     width: 5px;
     height: 100%;
-	background-color: $colorBorderBlue;
+	background-color: $colorBlue;
 	position: absolute;
 	left: 0;
 }
@@ -123,6 +123,9 @@ div .item-custom.new {
 			position: relative;
 			left: 6px;
 		}
+		.badge:hover{
+			box-shadow: 0 0 12px 0px #fe3401;
+		}
 	}
 }
 .icon-mail-list {
@@ -138,6 +141,7 @@ div .item-custom.new {
 }
 .text-empty {
 	color: hsl(0, 0%, 50%);
+	font-weight: 300;
 }
 
 .icon-mail-list.active:hover {

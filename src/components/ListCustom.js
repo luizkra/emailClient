@@ -3,7 +3,7 @@ import { addToViewer, showImbox, showTrash, showSpam } from '../lib/actionCreato
 import { connect } from 'react-redux';
 
 
-const ListCustom = ({ dataMail, click, type, currentIdMail, addToViewer }) => {
+const ListCustom = ({ dataMail, click, type, currentIdMail, addToViewer, current }) => {
 
     //const { dataMail, click, type, currentIdMail } = props;
     return (
@@ -17,7 +17,7 @@ const ListCustom = ({ dataMail, click, type, currentIdMail, addToViewer }) => {
             {dataMail.length > 0 &&
                 <div className="List-custom">
                     {dataMail.map((item, index) =>
-                        <div className={(item.isReaded == true && currentIdMail != index) ? 'item-custom' : (currentIdMail === index && item.isReaded == true) ? 'item-custom active' : 'item-custom new'} key={index} onClick={() => addToViewer(index, type)}>
+                        <div className={(item.isReaded == true && current.idMail != index) ? 'item-custom' : (current.idMail === index && item.isReaded == true) ? 'item-custom active' : 'item-custom new'} key={index} onClick={() => addToViewer(index, type)}>
                             <div className="col-user">
                                 <div className="item-name">{item.from}</div>
                                 <div className="item-description">{item.body}</div>
