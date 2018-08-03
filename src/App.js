@@ -4,24 +4,34 @@ import Content from './components/Content';
 import EmailList from './components/EmailList';
 import store from './lib/store';
 import data from './data/mail-data.json';
-import { addToList } from './lib/actionCreators';
+import { addToViewer, showImbox, showTrash, showSpam, addToList } from './lib/actionCreators';
+import { connect } from 'react-redux';
+
 
 class App extends Component {
-  constructor() {
-    super();
-    this.addToList = this.addToList.bind(this);
 
+  constructor(props) {
+    super(props);
+    
     this.state = {
       mails: []
     }
   }
-
+  
   componentDidMount() {
+
     this.interval = setInterval(() => {
-      data.map((mails, index)=>{
-        this.addToList(mails)
-      })
-    }, 9000);
+        data.map((mails)=>{
+          this.props.addToList(mails)
+        }) 
+    }, 2000);
+  }
+
+  componentDidUpdate() {
+  if(this.props.listMails.length === 4) {
+    clearInterval( this.interval);
+  }
+    
   }
 
   render() {
@@ -36,8 +46,21 @@ class App extends Component {
       </div>
     );
   }
-  addToList(mail) {
-    store.dispatch(addToList(mail))
+  // addToList(mail) {
+  //   store.dispatch(addToList(mail))
+  // }
+}
+const mapStateToProps = state => {
+  return {
+    listMails: state.listMails,
   }
 }
-export default App;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToList(mail) {
+      dispatch(addToList(mail))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);

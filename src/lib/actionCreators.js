@@ -43,10 +43,11 @@ const chageView = (currentView) => {
 }
 
 const actionButons = (current, typeMail) => {
-  let typeCorrect;
-  typeMail===2 ? typeCorrect= 'MOVE_TO_TRASH' : typeMail===2 ? typeCorrect= 'MOVE_TO_SPAM' : typeCorrect= 'ADD_TO_UNREAD';
+  console.log('​actionButons -> current, typeMail', current, typeMail);
+//   MOVE_TO_SPAM
+// MOVE_TO_INBOX
 	return {
-      type: typeCorrect,
+      type: typeMail,
       current
     }
 }
