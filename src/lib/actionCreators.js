@@ -1,7 +1,5 @@
-import data from './../data/mail-data.json';
 
 const addToList = mail => {
-  console.log('​data', data);
 	return {
       type: "ADD_TO_LIST",
       mail
@@ -37,28 +35,20 @@ const showSpam = mail => {
     }
 }
 
-const moveSpam = current => {
+const chageView = (currentView) => {
 	return {
-      type: "MOVE_TO_SPAM",
-      current
-    }
-}
-
-const moveTrash = current => {
-	return {
-      type: "MOVE_TO_TRASH",
-      current
+      type: "CHANGE_VIEW",
+      currentView
     }
 }
 
 const actionButons = (current, typeMail) => {
   let typeCorrect;
-  typeMail==='trash' ? typeCorrect= 'MOVE_TO_TRASH' : typeMail==='spam' ? typeCorrect= 'MOVE_TO_SPAM' : typeCorrect= 'ADD_TO_UNREAD';
-
+  typeMail===2 ? typeCorrect= 'MOVE_TO_TRASH' : typeMail===2 ? typeCorrect= 'MOVE_TO_SPAM' : typeCorrect= 'ADD_TO_UNREAD';
 	return {
       type: typeCorrect,
       current
     }
 }
 
-export { addToList, addToViewer, showImbox, showTrash, showSpam, moveSpam, moveTrash, actionButons }
+export { addToList, addToViewer, showImbox, showTrash, showSpam, actionButons, chageView }
