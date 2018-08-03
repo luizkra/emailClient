@@ -56,7 +56,10 @@
 	}
 }
 .item-custom:hover {
-	background-color: $customHover;
+	background-color: red;
+	box-shadow: 0 0 7px 3px rgb(79, 187, 239);
+	
+	
 }
 .item-custom.active {
 	background-color: $customHover;

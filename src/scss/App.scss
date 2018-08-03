@@ -10,7 +10,8 @@
 
 .App-right-side {
   background-color: $primariGray;
-  width: 60%;
+  // width: 60%;
+  width: 100%;
   height: auto;
   // border-left: $border1 solid $colorBorder;
   display: inline-grid;
@@ -24,4 +25,12 @@
   height: auto;
   z-index: 200;
   box-shadow: 0 0 16px 9px rgba(0, 0, 0, 0.12);
+  z-index: 999;
+  opacity: 1;
+  transition: all .75s ease;
+}
+.App-left-side.close{
+  width: 1px;
+  opacity: 0;
+  transition: all .75s ease;
 }
