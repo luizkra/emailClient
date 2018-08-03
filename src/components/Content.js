@@ -1,6 +1,5 @@
 import React from 'react';
 import '../scss/Content.scss';
-import store from '../lib/store';
 import { moveSpam, moveTrash, actionButons } from '../lib/actionCreators';
 import { connect } from 'react-redux';
 import ButtonCustom from './ButtonCustom';
@@ -13,24 +12,23 @@ const Content = ({ mailViewer, actionButons, current }) => {
           <div className="Content-empty">
             {/* <i className="far fa-envelope mail-icon"></i> */}
           </div> :
-
           <div className="contentBody">
             <header>
               <div className="left-menu-header">
                 <div className="">
-                <ButtonCustom customClass={'deleteMailButton'}  textBtn='Delete' click={() => actionButons(current.idMail, 'trash')} />
+                  <ButtonCustom customClass={'deleteMailButton'} textBtn='Delete' click={() => actionButons(current.idMail, 'trash')} />
                 </div>
                 <div className="">
-                <ButtonCustom customClass={'spamMailButton'}  textBtn='Spam' click={() => actionButons(current.idMail, 'spam')} />
+                  <ButtonCustom customClass={'spamMailButton'} textBtn='Spam' click={() => actionButons(current.idMail, 'spam')} />
                 </div>
               </div>
               <div className="rigth-menu-header">
                 <div className="">
-                <ButtonCustom customClass={'unreadMailButton'}  textBtn='Mark as unread' click={() => actionButons(current.idMail, 'inbox')} />
+                  <ButtonCustom customClass={'unreadMailButton'} textBtn='Mark as unread' click={() => actionButons(current.idMail, 'inbox')} />
                 </div>
               </div>
             </header>
-          <div className="Content">
+            <div className="Content">
               {mailViewer.map((item, index) =>
                 <div className="Wrapper-content" key={index}>
                   <div className="Content-header">
@@ -48,25 +46,22 @@ const Content = ({ mailViewer, actionButons, current }) => {
                   </div>
                   <div className="Content-container">
                     <div className="Wrapper-header">
-                      {/*<div className="Mail-header">
-              </div>*/}
-                      <div className="Mail-text">{item.body}
-                      </div>
+                      <div className="Mail-text">{item.body}</div>
                     </div>
-                      <div className="content-footer">
-                        <div className="icon-footer">
-                          <i className="fas fa-paperclip"></i>
-                        </div>
-                        <div className="replay-footer">
-                          Replay 
-                        </div>
+                    <div className="content-footer">
+                      <div className="icon-footer">
+                        <i className="fas fa-paperclip"></i>
                       </div>
+                      <div className="replay-footer">
+                        Replay
+                        </div>
+                    </div>
                   </div>
                 </div>
-            )}
+              )}
+            </div>
           </div>
-          </div>
-       }
+        }
       </div>
     );
   //}
