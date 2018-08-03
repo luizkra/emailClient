@@ -26,7 +26,7 @@ const EmailList = ({ listMails, currentView, inboxMails, trashMails, spanMails, 
 }
 
 const mapStateToProps = state => {
-  console.log('​state Marco-lista', state);
+  console.log('​state', state);
   return {
     listMails: state.listMails,
     spanMails: state.spanMails,

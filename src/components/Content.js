@@ -16,15 +16,23 @@ const Content = ({ mailViewer, actionButons, current }) => {
             <header>
               <div className="left-menu-header">
                 <div className="">
-                  <ButtonCustom customClass={'deleteMailButton'} textBtn='Delete' click={() => actionButons(current.idMail, 'trash')} />
+                  <ButtonCustom
+                    customClass={'deleteMailButton'}
+                    textBtn='Delete'
+                    click={() => actionButons(current.idMail, 'MOVE_TO_TRASH')}
+                  />
                 </div>
                 <div className="">
-                  <ButtonCustom customClass={'spamMailButton'} textBtn='Spam' click={() => actionButons(current.idMail, 'spam')} />
+                  <ButtonCustom
+                    customClass={'spamMailButton'}
+                    textBtn='Spam'
+                    click={() => actionButons(current.idMail, 'MOVE_TO_SPAM')}
+                  />
                 </div>
               </div>
               <div className="rigth-menu-header">
                 <div className="">
-                  <ButtonCustom customClass={'unreadMailButton'} textBtn='Mark as unread' click={() => actionButons(current.idMail, 'inbox')} />
+                  <ButtonCustom customClass={'unreadMailButton'} textBtn='Mark as unread' click={() => actionButons(current.idMail, 'MOVE_TO_INBOX')} />
                 </div>
               </div>
             </header>
