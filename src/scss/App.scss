@@ -19,18 +19,30 @@
 }
 
 .App-left-side {
-  width: 40%;
+  width: 0px;
+  opacity: 0;
+  position: relative;
   // max-width: 320px;
-  min-width: $minWidthList;
   height: auto;
   z-index: 200;
   box-shadow: 0 0 16px 9px rgba(0, 0, 0, 0.12);
   z-index: 999;
-  opacity: 1;
   transition: all .75s ease;
 }
-.App-left-side.close{
-  width: 1px;
-  opacity: 0;
+.App-left-side.open{
+  width: 40%;
+  opacity: 1;
   transition: all .75s ease;
+  min-width: $minWidthList;
+}
+.loader {
+  position: absolute;
+  top: calc(50% - 4em);
+  left: calc(50% - 4em);
+  width: 6em;
+  height: 6em;
+  border: 1.1em solid rgba(0, 0, 0, 0.2);
+  border-left: 1.1em solid $colorBlue;
+  border-radius: 50%;
+  animation: load8 1.1s infinite linear;
 }
