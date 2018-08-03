@@ -4,17 +4,15 @@ import store from '../lib/store';
 
 const options = [ "Order by", "Inbox", "Trash", "Spam"];
 class Selector extends Component {
-	constructor() {
-    super();
+	constructor(props) {
+    super(props);
     this.chageView = this.chageView.bind(this);
     this.state = { value: 'Order by'};
     this.chageView(0)
   }
   onChange(e) {
-    console.log('​Selector -> onChange -> e', e);
     if(e.target.value > 0){
-      console.log('​Selector -> onChange -> e.target.value', e.target.value);
-      this.chageView(e.target.value)
+      this.chageView(e.target.value, options[e.target.value])
     }
 
   }
@@ -24,14 +22,15 @@ class Selector extends Component {
       <div className="selector">
         <select  value={this.state.currentView} onChange={(e) => this.onChange(e)} className="selector-control">
           {options.map((option, index) => {
-            return <option value={index} key={index} >{option}</option>
+            return index === 0 ? <option value={index} key={index} disabled>Order by</option> :
+            <option value={index} key={index} >{option}</option>
           })}
         </select>
       </div>
     )
   }
-  chageView(currentView) {
-    store.dispatch(chageView(currentView))
+  chageView(currentView, viewList) {
+    store.dispatch(chageView(currentView, viewList))
   }
 }
 export default Selector;
