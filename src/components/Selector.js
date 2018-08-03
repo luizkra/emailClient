@@ -2,31 +2,35 @@ import React, { Component } from 'react';
 import { chageView, currentView } from '../lib/actionCreators';
 import store from '../lib/store';
 
-const options = [ "Order by", "Inbox", "Trasn", "Spam"];
+const options = [ "Order by", "Inbox", "Trash", "Spam"];
 class Selector extends Component {
-	constructor() {
-    super();
+	constructor(props) {
+    super(props);
     this.chageView = this.chageView.bind(this);
     this.state = { value: 'Order by'};
+    this.chageView(0)
   }
   onChange(e) {
-    if(e.target.value>0)
-      this.chageView(e.target.value)
+    if(e.target.value > 0){
+      this.chageView(e.target.value, options[e.target.value])
+    }
+
   }
 
   render() {
     return (
       <div className="selector">
-        <select  value={this.state.currentView} onChange={this.onChange.bind(this)} className="selector-control">
+        <select  value={this.state.currentView} onChange={(e) => this.onChange(e)} className="selector-control">
           {options.map((option, index) => {
-            return <option value={index} key={option} >{option}</option>
+            return index === 0 ? <option value={index} key={index} disabled>Order by</option> :
+            <option value={index} key={index} >{option}</option>
           })}
         </select>
       </div>
     )
   }
-  chageView(currentView) {
-    store.dispatch(chageView(currentView))
+  chageView(currentView, viewList) {
+    store.dispatch(chageView(currentView, viewList))
   }
 }
 export default Selector;

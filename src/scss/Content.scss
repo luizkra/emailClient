@@ -26,6 +26,14 @@ $direction: center;
 	display: flex;
 	flex-direction: column;
 	padding: 0px 40px 40px 40px;
+	position: relative;
+	left: -150%;
+	opacity: 0.3s;
+	transition-duration: 1s;
+	&.open {
+		left: 0%;
+		opacity: 1;
+	}
 
 	.contentBody {
 		display: contents;
@@ -43,7 +51,7 @@ $direction: center;
 
 	.content-section {
 		margin: 0px 0px 25px 0px;
-		padding: $paddingCustom - 10px;
+		padding: $paddingCustom - 15px $paddingCustom - 10px;;
 		border-radius: $border1;
 		box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.12);
 		background-color: $colorWhite;
@@ -59,7 +67,7 @@ $direction: center;
 			width: 80%;
 
 			.item-tags {
-				padding: 5px 10px 5px 10px;
+				padding: 2px 10px 2px 10px;
 				border-radius: $border1 + 1px;
 				box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.02);
 				border: $border1 solid $borderTags;
@@ -137,6 +145,10 @@ header{
 			background-color: $bodyBackground;
 			color: #b8b9b9;
 		}
+		
+		.spamMailButton:hover {    
+			animation: pulse-shadow--collection 3s infinite
+		}
 
 	}
 
@@ -150,7 +162,7 @@ header{
 		.unreadMailButton {
 			width: 115px;
 			height: 30px;
-			background-color: #4fbbee;
+			background-color: hsl(199, 82%, 62%);
 			color: #ffffff;
 
 		}

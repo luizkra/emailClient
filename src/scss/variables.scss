@@ -28,3 +28,25 @@ $backgroundLight: $colorBlueLight;
 $borderTags: hsl(0, 0%, 89%);
 $customHover: hsl(0, 0%, 98%);
 
+@keyframes pulse-shadow--collection {
+	0% {
+		-webkit-box-shadow: 0 0;
+		box-shadow: 0 0;
+	}
+  
+	70% {
+		box-shadow: 0 0 5px 10px rgba(255,255,255,0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(255,255,255,0);
+	}
+  }
+  @keyframes load8 {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+

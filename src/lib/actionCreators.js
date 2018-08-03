@@ -1,54 +1,63 @@
 
 const addToList = mail => {
-	return {
-      type: "ADD_TO_LIST",
-      mail
-    }
+  return {
+    type: "ADD_TO_LIST",
+    mail
+  }
 }
 
-const addToViewer = (idMail, typeMail) => {
-	return {
-      type: "ADD_TO_VIEWER",
-      idMail,
-      typeMail
-    }
+const addToViewer = (idMail, typeMail, viewList) => {
+  return {
+    type: "ADD_TO_VIEWER",
+    idMail,
+    typeMail,
+    viewList
+  }
+}
+
+const searchList = (text) => {
+  return {
+    type: "SEARCH",
+    text
+  }
 }
 
 const showImbox = mail => {
-	return {
-      type: "SHOW_IMBOX",
-      mail
-    }
+  return {
+    type: "SHOW_IMBOX",
+    mail
+  }
 }
 
 const showTrash = mail => {
-	return {
-      type: "SHOW_TRASH",
-      mail
-    }
+  return {
+    type: "SHOW_TRASH",
+    mail
+  }
 }
 
 const showSpam = mail => {
-	return {
-      type: "SHOW_SPAM",
-      mail
-    }
+  return {
+    type: "SHOW_SPAM",
+    mail
+  }
 }
 
-const chageView = (currentView) => {
-	return {
-      type: "CHANGE_VIEW",
-      currentView
-    }
+const chageView = (currentView, viewList) => {
+  return {
+    type: "CHANGE_VIEW",
+    currentView,
+    viewList
+  }
 }
 
-const actionButons = (current, typeMail) => {
-  let typeCorrect;
-  typeMail===2 ? typeCorrect= 'MOVE_TO_TRASH' : typeMail===2 ? typeCorrect= 'MOVE_TO_SPAM' : typeCorrect= 'ADD_TO_UNREAD';
-	return {
-      type: typeCorrect,
-      current
-    }
+const actionButons = (current, typeMail, mailViewer, viewList) => {
+  return {
+    type: typeMail,
+    current,
+    mailViewer,
+    viewList
+  }
 }
 
-export { addToList, addToViewer, showImbox, showTrash, showSpam, actionButons, chageView }
+export { addToList, addToViewer, showImbox, showTrash, showSpam, actionButons, chageView, searchList }

@@ -1,32 +1,41 @@
 import React from 'react';
 import '../scss/EmailList.scss';
-import { addToViewer, showImbox, showTrash, showSpam } from '../lib/actionCreators';
 import { connect } from 'react-redux';
 import Selector from './Selector';
 import ListCustom from './ListCustom';
+import SearchCustom from './SearchCustom';
 
-const EmailList = ({ listMails, currentView, inboxMails, trashMails, spanMails,  badge, current }) => {
-    return (
-      <div className="List-container">
-        <header className="List-header">
-          <div className="left-menu-list">
-            <h3 className="List-title">Inbox <span className="badge">{badge}</span></h3>
-          </div>
-          <div className="rigth-menu-list">
-            <Selector />
-          </div>
-        </header>
-        {/* { currentView == 2 ? (listMails=trashMails) 
-          : currentView == 3 ? (listMails=spanMails) 
-          : (listMails=inboxMails)
-        } */}
-        <ListCustom dataMail={listMails} type={currentView} currentIdMail={current}/>
-      </div>
-    );
+const EmailList = ({ listMails, currentView, viewList, badge, current, inboxMails, trashMails, spanMails }) => {
+  var listMaster
+  switch (viewList) {
+    case 'Trash':
+      listMaster = trashMails
+      break;
+    case 'Spam':
+      listMaster = spanMails
+      break;
+    default:
+      listMaster = inboxMails
+  }
+
+
+  return (
+    <div className="List-container">
+      <header className="List-header">
+        <div className="left-menu-list">
+          <h3 className="List-title">Inbox <span className="badge">{badge}</span></h3>
+        </div>
+        <div className="rigth-menu-list">
+          <Selector />
+        </div>
+      </header>
+      <SearchCustom />
+      <ListCustom dataMail={listMaster} type={currentView} currentIdMail={current} />
+    </div>
+  );
 }
 
 const mapStateToProps = state => {
-  console.log('​state Marco-lista', state);
   return {
     listMails: state.listMails,
     spanMails: state.spanMails,
@@ -34,14 +43,15 @@ const mapStateToProps = state => {
     inboxMails: state.inboxMails,
     current: state.current,
     currentView: state.currentView,
-    badge: state.badge
+    badge: state.badge,
+    viewList: state.viewList,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addToViewer2(idMail, typeMail) {
-        dispatch(addToViewer2(idMail, typeMail))
+      dispatch(addToViewer2(idMail, typeMail))
     }
   }
 }
