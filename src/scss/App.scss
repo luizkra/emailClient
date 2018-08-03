@@ -1,36 +1,27 @@
-.App {
-  text-align: center;
-}
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-.App-title {
-  font-size: 1.5em; 
-}
-.App-intro {
-  font-size: large; 
-}
+@import "variables";
+
 .App-container {
-  background-color: gray;
+  background-color: hsl(0, 0%, 50%);
   width: 100%;
   height: 100%;
   position: absolute;
   display: flex;
 }
-.App-right-side{
-  background-color: #F6F6F7;
-  width: 77%;
+
+.App-right-side {
+  background-color: $primariGray;
+  width: 60%;
   height: auto;
-  border-left: 1px solid #B5B5B5;
+  // border-left: $border1 solid $colorBorder;
   display: inline-grid;
+  z-index: 100;
 }
-.App-left-side{
-  background-color: green;
-  width: 23%;
-  max-width: 320px;
-  min-width: 320px;
+
+.App-left-side {
+  width: 40%;
+  // max-width: 320px;
+  min-width: $minWidthList;
   height: auto;
+  z-index: 200;
+  box-shadow: 0 0 16px 9px rgba(0, 0, 0, 0.12);
 }

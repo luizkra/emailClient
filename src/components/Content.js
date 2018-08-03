@@ -1,53 +1,67 @@
 import React from 'react';
 import '../scss/Content.scss';
-import store from '../lib/store';
-import { moveSpam, moveTrash, unreadEmail } from '../lib/actionCreators';
+import { moveSpam, moveTrash, actionButons } from '../lib/actionCreators';
 import { connect } from 'react-redux';
+import ButtonCustom from './ButtonCustom';
 
-const Content = ({ mailViewer, unreadEmail }) => {
+const Content = ({ mailViewer, actionButons, current }) => {
 
     return (
       <div className="Content-first">
-       { mailViewer.length < 1 ? 
-       <div className="Content-empty">
-           <i className="far fa-envelope mail-icon"></i>
-        </div> :
-        <div className="Content">
-          {mailViewer.map((item, index) =>
-            <div className="Wrapper-content" key={index}>
-              <header className="Content-header">
-                <div className="left-menu">
-                  <h5 className="Content-title">{item.subject}</h5>
+        {mailViewer.length < 1 ?
+          <div className="Content-empty">
+            {/* <i className="far fa-envelope mail-icon"></i> */}
+          </div> :
+          <div className="contentBody">
+            <header>
+              <div className="left-menu-header">
+                <div className="">
+                  <ButtonCustom customClass={'deleteMailButton'} textBtn='Delete' click={() => actionButons(current.idMail, 'trash')} />
                 </div>
-                <div className="rigth-menu">
-                  <div className="">
-                    <i className="fas fa-circle icon-action" onClick={() => unreadEmail(current.idMail, typeMail)}></i>
-                  </div>
-                  <div className="">
-                    <i className="far fa-trash-alt icon-action" onClick={() => this.unreadEmail(current.idMail, typeMail)}></i>
-                  </div>
-                  <div className="">
-                    <i className="fas fa-microchip icon-action" onClick={() => this.unreadEmail(current.idMail, typeMail)}></i>
-                  </div>
-                </div>
-              </header>
-              <div className="Content-container">
-                <div className="Mail-header">
-                  <div className="Mail-from">{item.from}</div>
-                  <div className="Mail-date">{new Intl.DateTimeFormat('es-GB', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: '2-digit'
-                  }).format(new Date(item.date))}
-                  </div>
-                </div>
-                <div className="Mail-text">{item.body}
+                <div className="">
+                  <ButtonCustom customClass={'spamMailButton'} textBtn='Spam' click={() => actionButons(current.idMail, 'spam')} />
                 </div>
               </div>
+              <div className="rigth-menu-header">
+                <div className="">
+                  <ButtonCustom customClass={'unreadMailButton'} textBtn='Mark as unread' click={() => actionButons(current.idMail, 'inbox')} />
+                </div>
+              </div>
+            </header>
+            <div className="Content">
+              {mailViewer.map((item, index) =>
+                <div className="Wrapper-content" key={index}>
+                  <div className="Content-header">
+                    <div className="left-menu">
+                      <h5 className="Content-title">{item.from}</h5>
+                    </div>
+                  </div>
+                  <div className="content-section">
+                    <div className="left-tags">
+                      <div className="tags">Tags</div>
+                    </div>
+                    <div className="rigth-tags">
+                      <div className="item-tags">{item.tag}</div>
+                    </div>
+                  </div>
+                  <div className="Content-container">
+                    <div className="Wrapper-header">
+                      <div className="Mail-text">{item.body}</div>
+                    </div>
+                    <div className="content-footer">
+                      <div className="icon-footer">
+                        <i className="fas fa-paperclip"></i>
+                      </div>
+                      <div className="replay-footer">
+                        Replay
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-       }
+          </div>
+        }
       </div>
     );
   //}
@@ -72,8 +86,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    unreadEmail(current, typeMail) {
-        dispatch(unreadEmail(current, typeMail))
+    actionButons(current, typeMail) {
+        dispatch(actionButons(current, typeMail))
     }
   }
 }

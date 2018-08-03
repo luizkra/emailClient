@@ -1,80 +1,47 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import store from '../lib/store';
 import '../scss/EmailList.scss';
 import { addToViewer, showImbox, showTrash, showSpam } from '../lib/actionCreators';
 import { connect } from 'react-redux';
 import Selector from './Selector';
+import ListCustom from './ListCustom';
 
-const EmailList = ({ listMails, addToViewer, current }) => {
+const EmailList = ({ listMails, currentView, inboxMails, trashMails, spanMails,  badge, current }) => {
     return (
       <div className="List-container">
         <header className="List-header">
           <div className="left-menu-list">
-            <h3 className="List-title">title</h3>
+            <h3 className="List-title">Inbox <span className="badge">{badge}</span></h3>
           </div>
           <div className="rigth-menu-list">
-          <Selector/>
+            <Selector />
           </div>
         </header>
-        <div className={(listMails.length < 1) ? 'text-center-flex' : 'content-list'}>
-          {listMails.length < 1 &&
-            <div className="text-center-flex">
-              <h2 className="text-empty">  vacío</h2>
-            </div>
-          }
-          {listMails.length > 0 &&
-            <div className="List-custom">
-              {listMails.map((item, index) =>
-                <div className={(item.isReaded == true && current.idMail != index) ? 'item-custom' : (current.idMail === index && item.isReaded == true) ? 'item-custom active' : 'item-custom new'} key={index} onClick={() => addToViewer(index, 'spam')}>
-                  <div className="item-wrapper">
-                    <div className="item-user">
-                      <div className="user-name">{item.from}</div>
-                      <div className="item-date">{new Intl.DateTimeFormat('en-GB', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: '2-digit'
-                      }).format(new Date(item.date))}</div>
-                    </div>
-                    <div className="item-tittle">{item.subject}</div>
-                    <div className="item-description">{item.body}</div>
-                  </div>
-                </div>
-              )}
-            </div>
-          }
-        </div>
+        {/* { currentView == 2 ? (listMails=trashMails) 
+          : currentView == 3 ? (listMails=spanMails) 
+          : (listMails=inboxMails)
+        } */}
+        <ListCustom dataMail={listMails} type={currentView} currentIdMail={current}/>
       </div>
     );
-  //}
-
-  // addToViewer(idMail, typeMail) {
-  //   store.dispatch(addToViewer(idMail, typeMail))
-  // }
-  // showImbox() {
-  //   store.dispatch(showImbox())
-  // }
-  // showTrash() {
-  //   store.dispatch(showTrash())
-  // }
-  // showSpam() {
-  //   store.dispatch(showSpam())
-  // }
-
 }
 
 const mapStateToProps = state => {
-  console.log('​state lista', state);
+  console.log('​state Marco-lista', state);
   return {
     listMails: state.listMails,
+    spanMails: state.spanMails,
+    trashMails: state.trashMails,
+    inboxMails: state.inboxMails,
     current: state.current,
+    currentView: state.currentView,
+    badge: state.badge
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToViewer(idMail, typeMail) {
-        dispatch(addToViewer(idMail, typeMail))
+    addToViewer2(idMail, typeMail) {
+        dispatch(addToViewer2(idMail, typeMail))
     }
   }
 }
