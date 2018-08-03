@@ -4,6 +4,7 @@ import { addToViewer, showImbox, showTrash, showSpam } from '../lib/actionCreato
 import { connect } from 'react-redux';
 import Selector from './Selector';
 import ListCustom from './ListCustom';
+import SearchCustom from './SearchCustom';
 
 const EmailList = ({ listMails, currentView, inboxMails, trashMails, spanMails,  badge, current }) => {
     return (
@@ -16,6 +17,7 @@ const EmailList = ({ listMails, currentView, inboxMails, trashMails, spanMails, 
             <Selector />
           </div>
         </header>
+        <SearchCustom  />
         {/* { currentView == 2 ? (listMails=trashMails) 
           : currentView == 3 ? (listMails=spanMails) 
           : (listMails=inboxMails)

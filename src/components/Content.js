@@ -36,7 +36,7 @@ const Content = ({ mailViewer, actionButons, current }) => {
                 </div>
               </div>
             </header>
-            <div className="Content">
+            <div className={ (mailViewer.length > 0 && mailViewer != undefined) ? "Content open" : "Content"}>
               {mailViewer.map((item, index) =>
                 <div className="Wrapper-content" key={index}>
                   <div className="Content-header">
